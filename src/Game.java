@@ -9,8 +9,12 @@ public class Game {
 	private final int LOSER_ROLL = 1;
 	
 	public Game(){
-		Player player1 = new GUIPlayer();
-		Player player2 = new ComputerPlayer();
+		//Player player1 = new GUIPlayer();
+		//Player player2 = new ComputerPlayer();
+		//The players were never created and were null.
+		player1 = new GUIPlayer();
+		player2 = new ComputerPlayer();
+		
 		die = new Random();
 		spinner = new Spinner();
 	}
@@ -49,6 +53,7 @@ public class Game {
 		printStartRoundMessage(whoseTurn);
 		while(keepGoing){
 			int roll = die.nextInt(7);
+			//this line can return any number from 0 to 6. needs to be from 1 to 6.
 			String spin = spinner.spin();
 			System.out.println(roll+ " "+ spin);
 			
@@ -73,6 +78,7 @@ public class Game {
 	// True if one of the players has won the game.
 	public boolean winner(){
 		return player1.hasWon() && player2.hasWon();
+
 	}
 	
 	/* 
