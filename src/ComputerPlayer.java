@@ -4,6 +4,9 @@ public class ComputerPlayer extends Player{
 	
 	public ComputerPlayer(){
 		super("R2D2");
+		//Does not set up name in Player class.
+		String name = "R2D2";
+		myName = name;
 	}
 
 	@Override
