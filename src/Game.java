@@ -9,8 +9,12 @@ public class Game {
 	private final int LOSER_ROLL = 1;
 	
 	public Game(){
-		Player player1 = new GUIPlayer();
-		Player player2 = new ComputerPlayer();
+		//Player player1 = new GUIPlayer();
+		//Player player2 = new ComputerPlayer();
+		//The players were never created and were null.
+		player1 = new GUIPlayer();
+		player2 = new ComputerPlayer();
+		
 		die = new Random();
 		spinner = new Spinner();
 	}
@@ -48,15 +52,23 @@ public class Game {
 		boolean keepGoing = true;
 		printStartRoundMessage(whoseTurn);
 		while(keepGoing){
-			int roll = die.nextInt(7);
+			//int roll = die.nextInt(7);
+			//this line can return any number from 0 to 6. needs to be from 1 to 6.
+			int roll = die.nextInt(6) + 1;
 			String spin = spinner.spin();
 			System.out.println(roll+ " "+ spin);
 			
 			if(roll == LOSER_ROLL){
 				System.out.println("Lose a turn.");
+				if(spin.equals(LOSER_SPIN.toUpperCase())) {
+					System.out.println("Too bad!  Lose all your points.");
+					whoseTurn.resetScore();
+				}
 				return 0;
 			}
-			else if(spin == LOSER_SPIN.toUpperCase()){
+			//else if(spin == LOSER_SPIN.toUpperCase()){
+			//spin is an object type not a primitive type so .equals should be used instead of ==.
+			else if(spin.equals(LOSER_SPIN.toUpperCase())) {
 				System.out.println("Too bad!  Lose all your points.");
 				whoseTurn.resetScore();
 				return 0;
@@ -72,7 +84,10 @@ public class Game {
 	
 	// True if one of the players has won the game.
 	public boolean winner(){
-		return player1.hasWon() && player2.hasWon();
+		//return player1.hasWon() && player2.hasWon();
+		//only returns true if both players have 100+ points.
+		return player1.hasWon() || player2.hasWon();
+
 	}
 	
 	/* 
